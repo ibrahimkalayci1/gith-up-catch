@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const { data } = await axios(API_URL + username)
        // console.log(data)
         createUserCard(data)
-           
+        getRepos(username)        
       } catch (err) {
         //console.log(err);
         createErrorCard("Aradığınız Kullanıcı Bulunamadı")
@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", () => {
         search.value = "";
       }
     });
-  });
+  
 
      function createUserCard(user){
         const userName= user.name || user.login
@@ -76,7 +76,7 @@ document.addEventListener("DOMContentLoaded", () => {
      main.innerHTML = cardErrorHTML
     }
 
-    getRepos(username) 
+    
     async function getRepos(username){
         try{
         const {data} = await axios(API_URL + username + '/repos')
@@ -97,7 +97,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const reposLink = document.createElement('a')
             
             reposLink.href = repo.html_url
-            repos.link.target = "_blank"
+            reposLink.target = "_blank"
             reposLink.innerHTML = `<i class="fa-solid fa-bookmark"></i> ${repo.name}`
 
             reposEl.appendChild(reposLink)
@@ -105,4 +105,4 @@ document.addEventListener("DOMContentLoaded", () => {
         }
         
         
-    
+      });
